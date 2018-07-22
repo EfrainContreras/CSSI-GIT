@@ -20,26 +20,42 @@ jinja_environment = jinja2.Environment(
 # 5. Messaging between users
 
 
+
+def find_or_create_user():
+    user = users.get_current_user()
+    if user:
+        key = ndb.Key('JUser', user.user_id())
+        juser = key.get()
+        if not juser:
+            juser = JUser(key=key,
+                          nickname=user.nickname(),
+                          email=user.email()
+                          )
+        juser.put()
+        return juser;
+    return None
+def get_log_inout_url(user):
+    if user:
+        return users.create_logout_url('/')
+    else:
+        return users.create_login_url('/')
+
+
+
+class JUser(ndb.Model):
+    # user_id is part of the key
+    nickname = ndb.StringProperty(required=True)
+    email    = ndb.StringProperty(required=True)
+
+
+
+
 class MainPage(webapp2.RequestHandler):
     def get(self):
 
-        user = users.get_current_user()
-        if user:
-            nickname = user.nickname()
-            logout_url = users.create_logout_url('/')
-            greeting = 'Welcome, {}! (<a href="{}">sign out</a>)'.format(
-                nickname, logout_url)
-        else:
-            login_url = users.create_login_url('/')
-            greeting = '<a href="{}">Sign in</a>'.format(login_url)
+        user = find_or_create_user()
+        log_url = get_log_inout_url(user)
 
-
-        if user:
-            get_log_inout_url = users.create_logout_url('/')
-        else:
-            get_log_inout_url = users.create_login_url('/')
-
-        log_url = get_log_inout_url
         variables = {"log_url": log_url}
 
 
