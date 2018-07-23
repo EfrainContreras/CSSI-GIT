@@ -4,6 +4,10 @@ threadsafe: true
 service: jeopardy
 
 handlers:
+- url: /assets
+  static_dir: templates/assets
+- url: /images
+  static_dir: templates/images
 - url: /.*
   script: main.app
 
