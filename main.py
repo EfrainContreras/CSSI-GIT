@@ -20,29 +20,6 @@ jinja_environment = jinja2.Environment(
 # 5. Messaging between users
 
 
-# START LOGIN INFO
-def find_or_create_user():
-    user = users.get_current_user()
-    if user:
-        key = ndb.Key('JUser', user.user_id())
-        juser = key.get()
-        if not juser:
-            juser = JUser(key=key,
-                          nickname=user.nickname(),
-                          email=user.email()
-                          )
-        juser.put()
-        return juser;
-    return None
-
-def get_log_inout_url(user):
-    if user:
-        return users.create_logout_url('/')
-    else:
-        return users.create_login_url('/')
-# END LOGIN INFO
-
-
 
 # START STORE USER INFO
 class JUser(ndb.Model):
@@ -55,8 +32,8 @@ class JUser(ndb.Model):
 class MainPage(webapp2.RequestHandler):
     def get(self):
 
-        user = find_or_create_user()
-        log_url = get_log_inout_url(user)
+        user = 0
+        log_url = False
 
         variables = {"user": user,
                     "log_url": log_url}
@@ -70,6 +47,13 @@ class ProfileHandler(webapp2.RequestHandler):
 
 class AboutHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("about.html")
+
+class ProfileHandler(webapp2.RequestHandler):
+    def get(self):
+
+
+        template = jinja_environment.get_template("profile.html")
+        self.response.write(template.render())
 
 
 
