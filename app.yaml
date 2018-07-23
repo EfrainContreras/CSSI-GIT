@@ -1,13 +1,15 @@
 runtime: python27
 api_version: 1
 threadsafe: true
-service: jeopardy
+
 
 handlers:
 - url: /assets
   static_dir: templates/assets
 - url: /images
   static_dir: templates/images
+- url: /static
+  static_dir: static
 - url: /.*
   script: main.app
 

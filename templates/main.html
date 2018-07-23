@@ -11,6 +11,9 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="https://apis.google.com/js/platform.js" async defer></script>
+		<meta name="google-signin-client_id" content="1014816795994-hs7gd43otlspf6qkvqulj10hhvloqiel.apps.googleusercontent.com">
+		<script src="/static/script.js"></script>
 	</head>
 	<body class="landing is-preload">
 
@@ -46,7 +49,11 @@
 							dining app<br />
 							created by Team Powerpuff</a>.</p>
 							<ul class="actions special">
-								<li><a href="#" class="button primary">Log In</a></li>
+								{% if user %}
+								<li><a href="{{log_url}}" class="button primary">Log Out</a></li>
+								{% else %}
+								<div class="g-signin2" data-onsuccess="onSignIn"></div>
+								{% endif %}
 							</ul>
 						</div>
 						<a href="#one" class="more scrolly">Learn More</a>
