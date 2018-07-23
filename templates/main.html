@@ -6,6 +6,11 @@
   <body>
     <h1>Eat Together</h1>
     <p>For lonely people</p>
+    {% if user %}
+      <p>Welcome Back, {{user.nickname}}</p>
+      <p> <a href="{{log_url}}">Sign Out</a></p>
+    {% else %}
       <p>Welcome Guest! Please <a href="{{log_url}}">Sign In</a></p>
+    {% endif %}
   </body>
 </html>
