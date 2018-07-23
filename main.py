@@ -18,6 +18,33 @@ jinja_environment = jinja2.Environment(
 # 3. Make a grid displaying all request mades with info of the user who requested
 # 4. A way to block people who abuse the app
 # 5. Messaging between users
+def find_or_create_user():
+     user = users.get_current_user()
+     if user:
+         key = ndb.Key('JUser', user.user_id())
+         juser = key.get()
+         if not juser:
+             juser = JUser(key=key,
+                            nickname=user.nickname(),
+                           email=user.email()
+                           )
+         juser.put()
+         return juser;
+     return None
+
+def get_log_inout_url(user):
+     if user:
+         return users.create_logout_url('/')
+     else:
+         return users.create_login_url('/')
+
+
+
+class JUser(ndb.Model):
+    # user_id is part of the key
+    nickname = ndb.StringProperty(required=True)
+    email    = ndb.StringProperty(required=True)
+
 
 
 
@@ -32,8 +59,8 @@ class JUser(ndb.Model):
 class MainPage(webapp2.RequestHandler):
     def get(self):
 
-        user = 0
-        log_url = False
+        user = find_or_create_user()
+        log_url = get_log_inout_url(user)
 
         variables = {"user": user,
                     "log_url": log_url}
