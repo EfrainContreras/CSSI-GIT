@@ -65,12 +65,19 @@ class MainPage(webapp2.RequestHandler):
         template = jinja_environment.get_template("main.html")
         self.response.write(template.render(variables))
 
+class ProfileHandler(webapp2.RequestHandler):
+        template = jinja_environment.get_template("profile.html")
+
+class AboutHandler(webapp2.RequestHandler):
+        template = jinja_environment.get_template("about.html")
 
 
 
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
+    ('/profile', ProfileHandler),
+    ('/about',AboutHandler),
 ], debug=True)
 
 
