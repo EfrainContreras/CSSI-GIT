@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+		<meta name="google-signin-client_id" content="1014816795994-hs7gd43otlspf6qkvqulj10hhvloqiel.apps.googleusercontent.com">
+		<script src="/static/script.js"></script>
+    <title>Your Profile</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+
+    <title>Your Profile</title>
+  </head>
+  <body class="is-preload">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+        <header id="header" class="alt">
+          <h1><a href="index.html">Meet2Eat</a></h1>
+          <nav id="nav">
+            <ul>
+              <li class="special">
+                <a href="#menu" class="menuToggle"><span>Menu</span></a>
+                <div id="menu">
+                  <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="#">Log In</a></li>
+                    <li><a href = "/profile">Profile</a></li>
+                    <li><a href="#">Matches</a></li>
+                    <li><a href="/about">About</a></li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2>Generic Page</h2>
+							<p>Aliquam ut ex ut interdum donec amet imperdiet eleifend</p>
+						</header>
+						<section class="wrapper style5">
+							<div class="inner">
+                <input name = "fname" placeholder = "Name" type = "text"></br>
+                Last Name: <input name = "lname"></br>
+
+                <a href="" onclick="signOut();">Sign out</a>
+              <script>
+                function signOut() {
+                  var auth2 = gapi.auth2.getAuthInstance();
+                  auth2.signOut().then(function () {
+                    console.log('User signed out.');
+                  });
+                }
+              </script>
+
+
+							</div>
+						</section>
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+  </body>
+</html>
