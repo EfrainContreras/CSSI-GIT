@@ -2583,7 +2583,7 @@ input, select, textarea {
 
 			.features li:before {
 				display: block;
-				color: red;
+				color: #ca4009;
 				position: absolute;
 				left: 1.75em;
 				top: 2.75em;
