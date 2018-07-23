@@ -163,7 +163,7 @@ input, select, textarea {
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		color: #fff;
+		color: #ffffff	;
 		font-weight: 800;
 		letter-spacing: 0.225em;
 		line-height: 1em;
@@ -2057,15 +2057,15 @@ input, select, textarea {
 			}
 
 		.icon.style1 {
-			color: #00ffcc;
+			color: #ca4009;
 		}
 
 		.icon.style2 {
-			color: #00f0ff;
+			color: #ca4009;
 		}
 
 		.icon.style3 {
-			color: #76ddff;
+			color: #ca4009;
 		}
 
 /* Image */
@@ -2796,7 +2796,7 @@ input, select, textarea {
 		}
 
 		.wrapper.style1 {
-			background-color: #21b2a6;
+			background-color: #e86f1d;
 			color: #c8ece9;
 		}
 
@@ -2829,7 +2829,7 @@ input, select, textarea {
 			}
 
 			.wrapper.style1 header.major p {
-				color: #c8ece9;
+				color: #ffffff;
 			}
 
 			.wrapper.style1 label {
@@ -2955,7 +2955,7 @@ input, select, textarea {
 			}
 
 		.wrapper.style2 {
-			background-color: #2e3842;
+			background-color: #2e3842	;
 		}
 
 		.wrapper.style3 {
@@ -3330,7 +3330,7 @@ input, select, textarea {
 		-ms-transition: -ms-transform 0.5s ease;
 		transition: transform 0.5s ease;
 		-webkit-overflow-scrolling: touch;
-		background: #21b2a6;
+		background: #e78e44;
 		color: #ffffff;
 		height: 100%;
 		max-width: 80%;
