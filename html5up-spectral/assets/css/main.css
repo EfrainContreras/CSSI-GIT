@@ -2057,7 +2057,7 @@ input, select, textarea {
 			}
 
 		.icon.style1 {
-			color: #00ffcc;
+			color: purple;
 		}
 
 		.icon.style2 {
@@ -2582,8 +2582,8 @@ input, select, textarea {
 			}
 
 			.features li:before {
+				color: orange;
 				display: block;
-				color: #00ffcc;
 				position: absolute;
 				left: 1.75em;
 				top: 2.75em;
