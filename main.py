@@ -107,14 +107,28 @@ class RequestHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("request.html")
         self.response.write(template.render(variables))
 
+
 class MatchesHandler(webapp2.RequestHandler):
     def get(self):
         all_users = JUser.query()
-
         all_users = all_users.fetch(10)
-        print (all_users)
-
         current_user = find_or_create_user()
+
+        variables = {"all_users": all_users,
+                     "current_user": current_user}
+        template = jinja_environment.get_template("matches.html")
+        self.response.write(template.render(variables))
+
+    def post(self):
+        all_users = JUser.query()
+        all_users = all_users.fetch(10)
+        current_user = find_or_create_user()
+
+        print "CLICKED"
+        clickedUser = self.request.get("{{user.num}}")
+        clickedUserName = self.request.get("name")
+        print clickedUser
+        print clickedUserName
 
         variables = {"all_users": all_users,
                      "current_user": current_user}
@@ -160,6 +174,7 @@ class PlacesHandler(webapp2.RequestHandler):
         template = jinja2_environment.get_template("places.html")
         variables = {"cuisine_name": cuisine_name}
         self.response.write(template.render(variables))
+
 
 
 

@@ -55,21 +55,19 @@
 												{% for user in all_users %}
 													{% if user.num > 0 %}
 														{% if current_user != user %}
-			      									<li class="icon fa-heart-o 2" href="https://www.w3schools.com/jsref/event_onclick.asp">
-				      									<h3>{{user.name}}</h3>
-																<p>Bio: {{user.bio}}</p>
-				      									<p>Location: {{user.location}}</p>
-				      									<p>Time: {{user.time}}</p>
-																<p>Number of People: {{user.num}}</p>
+			      									<li class="icon fa-heart-o 2">
+																<form method="POST">
+					      									<h3>{{user.name}}</h3>
+																	<p>Bio: {{user.bio}}</p>
+					      									<p>Location: {{user.location}}</p>
+					      									<p>Time: {{user.time}}</p>
+																	<p>Spaces Left: {{user.num}}</p>
+																	<p>Number of People Going: 1</p>
+																	
+																	<button class="button primary">I'll Go</button>
+																</form>
 				       								</li>
 														{% endif %}
-	      									<li class="icon fa-heart-o">
-		      									<h3>{{user.name}}</h3>
-														<p>Bio: {{user.bio}}</p>
-		      									<p>Location: {{user.location}}</p>
-		      									<p>Time: {{user.time}}</p>
-														<p>Number of People: {{user.num}}</p>
-		       								</li>
 													{% endif %}
 	      								{% endfor %}
 	      							</ul>

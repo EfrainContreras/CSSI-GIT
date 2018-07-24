@@ -44,15 +44,23 @@
 					<section id="banner">
 						<div class="inner">
 							<h2>Meet2Eat</h2>
-							<p>The new social	dining app<br />
-							created by Team Powerpuff</a></p>
+							<p>The new social	dining app<br/>
+							created by Team Powerpuff</p>
 							<ul class="actions special">
 								{% if user %}
 									<li><a href="{{log_url}}" class="button primary">Log Out</a></li>
+
 								{% else %}
 									<li><a href="{{log_url}}" class="button primary">Log In</a></li>
 								{% endif %}
 							</ul>
+							{% if user %}
+								{% if user.name %}
+								<p>Welcome back, {{user.name}}</p>
+								{% else %}
+								<p>Welcome, please create a profile</p>
+								{% endif %}
+							{% endif %}
 						</div>
 						<a href="#one" class="more scrolly">Learn More</a>
 					</section>
