@@ -100,11 +100,19 @@ class RequestHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("request.html")
         self.response.write(template.render(variables))
 
+class MatchesHandler(webapp2.RequestHandler):
+    def get(self):
+
+
+        template = jinja_environment.get_template("matches.html")
+        self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
     ('/', MainPage),
     ('/profile', ProfileHandler),
     ('/about', AboutHandler),
     ('/request', RequestHandler),
+    ('/matches', MatchesHandler),
 ], debug=True)
 
 
