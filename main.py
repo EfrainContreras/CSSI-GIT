@@ -45,9 +45,14 @@ class JUser(ndb.Model):
     email = ndb.StringProperty(required=True)
     bio = ndb.StringProperty(required=False)
 
+    name = ndb.StringProperty(required=False)
+    phone = ndb.StringProperty(required=False)
+    location = ndb.StringProperty(required=False)
+    time = ndb.StringProperty(required=False)
 
-class PlaceRequest(ndb.Model):
-    location = ndb.StringProperty(required=True)
+
+
+
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -72,8 +77,9 @@ class ProfileHandler(webapp2.RequestHandler):
 
     def post(self):
         user = find_or_create_user()
-        bio = self.request.get("bio")
-        user.bio = bio
+        user.name = self.request.get("name")
+        user.bio = self.request.get("bio")
+        user.phone = self.request.get("phone")
         user.put()
 
         variables = {"user": user}
@@ -89,14 +95,21 @@ class AboutHandler(webapp2.RequestHandler):
 
 class RequestHandler(webapp2.RequestHandler):
     def get(self):
+        user = find_or_create_user()
+
+        variables = {"user": user}
         template = jinja_environment.get_template("request.html")
         self.response.write(template.render())
 
     def post(self):
-        variables = {"name": self.request.get("name"),
-                     "location": self.request.get("location"),
-                     "time": self.request.get("time")}
+        user = find_or_create_user()
 
+        user.location = self.request.get("location")
+        user.time = self.request.get("time")
+
+        user.put()
+
+        variables = {"user": user}
         template = jinja_environment.get_template("request.html")
         self.response.write(template.render(variables))
 
