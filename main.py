@@ -49,6 +49,7 @@ class JUser(ndb.Model):
     phone = ndb.StringProperty(required=False)
     location = ndb.StringProperty(required=False)
     time = ndb.StringProperty(required=False)
+    num = ndb.StringProperty(required=False)
 
 
 
@@ -99,13 +100,14 @@ class RequestHandler(webapp2.RequestHandler):
 
         variables = {"user": user}
         template = jinja_environment.get_template("request.html")
-        self.response.write(template.render())
+        self.response.write(template.render(variables))
 
     def post(self):
         user = find_or_create_user()
 
         user.location = self.request.get("location")
         user.time = self.request.get("time")
+        user.num = self.request.get("num")
 
         user.put()
 
