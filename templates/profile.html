@@ -45,16 +45,27 @@
 						<section class="wrapper style5">
               {% if user %}
   							<div class="inner">
-                  <p>Name: {{user.nickname}}</p>
+                  {% if user.name %}
+                    <p>Name: {{user.name}}</p>
+                  {% endif %}
+
                   <p>Email: {{user.email}}</p>
+
+                  {% if user.phone %}
+                    <p>Phone: {{user.phone}}</p>
+                  {% endif %}
+
                   {% if user.bio %}
-                    <p>{{user.bio}}</p>
-                    <form method = "GET">
+                    <p>Bio: {{user.bio}}</p>
+                    <form method = "POST">
                       <button>Edit</button>
                     </form>
                   {% else %}
                     <form method="POST">
+                      <input name = "name" placeholder = "Name" type = "text"></br>
+                      <input name = "phone" placeholder = "Phone" type = "text"></br>
                       <input name = "bio" placeholder = "Bio" type = "text"></br>
+
                       <button>Submit</button>
                     </form>
                   {% endif %}
