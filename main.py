@@ -149,7 +149,9 @@ class CalendarHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("calendar.html")
         self.response.write(template.render())
 
-
+# class ButtonPress(webapp2.RequestHandler):
+#     def post(self):
+#         pass
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
