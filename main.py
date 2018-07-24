@@ -8,6 +8,7 @@ from google.appengine.ext import ndb
 from google.appengine.api import users
 
 
+
 jinja_environment = jinja2.Environment(
     loader = jinja2.FileSystemLoader(
         os.path.dirname(__file__) + '/templates'))
@@ -60,10 +61,10 @@ class MainPage(webapp2.RequestHandler):
         user = find_or_create_user()
         log_url = get_log_inout_url(user)
 
+    
+
         variables = {"user": user,
                     "log_url": log_url}
-
-
         template = jinja_environment.get_template("main.html")
         self.response.write(template.render(variables))
 
@@ -114,7 +115,7 @@ class MatchesHandler(webapp2.RequestHandler):
         print (all_users)
 
         current_user = find_or_create_user()
-        
+
         variables = {"all_users": all_users,
                      "current_user": current_user}
         template = jinja_environment.get_template("matches.html")
