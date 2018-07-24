@@ -38,18 +38,12 @@ def get_log_inout_url(user):
      else:
          return users.create_login_url('/')
 
-class JUser(ndb.Model):
-    # user_id is part of the key
-    nickname = ndb.StringProperty(required=True)
-    email    = ndb.StringProperty(required=True)
-
-
-
 
 # START STORE USER INFO
 class JUser(ndb.Model):
     nickname =  ndb.StringProperty(required=True)
     email = ndb.StringProperty(required=True)
+    bio = ndb.StringProperty(required=False)
 
 
 
@@ -69,10 +63,21 @@ class MainPage(webapp2.RequestHandler):
 
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
-
-
+        user = find_or_create_user()
+        variables = {"user": user}
         template = jinja_environment.get_template("profile.html")
-        self.response.write(template.render())
+        self.response.write(template.render(variables))
+
+
+    def post(self):
+        user = find_or_create_user()
+        bio = self.request.get("bio")
+        user.bio = bio
+        user.put()
+        
+        variables = {"user": user}
+        template = jinja_environment.get_template("profile.html")
+        self.response.write(template.render(variables))
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
