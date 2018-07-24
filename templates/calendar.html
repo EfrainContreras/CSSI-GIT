@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Your Matches</title>
+		<title>Meet2Eat Calendar</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -29,8 +29,8 @@
 											<li><a href="/">Home</a></li>
 											<li><a href = '/profile'>Profile</a></li>
 											<li><a href="/request">Request</a></li>
-                      <li><a href = '/calendar'>Calendar</a></li>
-											<li><a href="/about">About</a></li>
+											<li><a href="/matches">Matches</a></li>
+                      <li><a href = '/about'>About</a></li>
 										</ul>
 									</div>
 								</li>
@@ -41,34 +41,11 @@
 				<!-- Main -->
 					<article id="main">
 						<header>
-							<h2>Your Matches</h2>
+							<h2>Calendar</h2>
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
-                <section id="three" class="inner">
-      						<div class="inner">
-      							<header class="major" style="text-align: center; height:60px;">
-      								<h2>What Are Others Saying?</h2>
-      							</header>
-										{% if current_user.name %}
-	      							<ul class="features" style="margin: 30px;">
-												{% for user in all_users %}
-													{% if user.num > 0 %}
-	      									<li class="icon fa-heart-o">
-		      									<h3>{{user.name}}</h3>
-														<p>Bio: {{user.bio}}</p>
-		      									<p>Location: {{user.location}}</p>
-		      									<p>Time: {{user.time}}</p>
-														<p>Number of People: {{user.num}}</p>
-		       								</li>
-													{% endif %}
-	      								{% endfor %}
-	      							</ul>
-										{% else %}
-										<div class="inner">
-	                    <p>Please login and create a profile before looking at the matches</p>
-	                  </div>
-										{% endif %}
+
 							</div>
 						</section>
 					</article>
@@ -76,8 +53,8 @@
 				<!-- Footer -->
 				<footer id="footer">
 					<ul class="icons">
-						<li><a href="https://twitter.com/meet2eat1" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="https://instagram.com/meet2eatdining" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://twitter.com/meet2eat1" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://instagram.com/meet2eatdining" target="_blank" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 					</ul>
 					<ul class="copyright">
 						<li>&copy; Meet2Eat</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>

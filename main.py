@@ -114,7 +114,7 @@ class MatchesHandler(webapp2.RequestHandler):
         print (all_users)
 
         current_user = find_or_create_user()
-        
+
         variables = {"all_users": all_users,
                      "current_user": current_user}
         template = jinja_environment.get_template("matches.html")
@@ -127,6 +127,13 @@ class AboutHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("about.html")
         self.response.write(template.render())
 
+class CalendarHandler(webapp2.RequestHandler):
+    def get(self):
+
+
+        template = jinja_environment.get_template("calendar.html")
+        self.response.write(template.render())
+
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -134,6 +141,7 @@ app = webapp2.WSGIApplication([
     ('/about', AboutHandler),
     ('/request', RequestHandler),
     ('/matches', MatchesHandler),
+    ('/calendar', CalendarHandler),
 ], debug=True)
 
 
