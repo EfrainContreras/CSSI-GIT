@@ -25,7 +25,7 @@ def find_or_create_user():
          juser = key.get()
          if not juser:
              juser = JUser(key=key,
-                            nickname=user.nickname(),
+                           nickname=user.nickname(),
                            email=user.email()
                            )
          juser.put()
@@ -46,7 +46,8 @@ class JUser(ndb.Model):
     bio = ndb.StringProperty(required=False)
 
 
-
+class PlaceRequest(ndb.Model):
+    location = ndb.StringProperty(required=True)
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -74,7 +75,7 @@ class ProfileHandler(webapp2.RequestHandler):
         bio = self.request.get("bio")
         user.bio = bio
         user.put()
-        
+
         variables = {"user": user}
         template = jinja_environment.get_template("profile.html")
         self.response.write(template.render(variables))

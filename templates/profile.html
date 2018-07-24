@@ -44,18 +44,27 @@
 							<h2>Profile</h2>
 						</header>
 						<section class="wrapper style5">
-							<div class="inner">
-                <p>Name: {{user.nickname}}</p>
-                <p>Email: {{user.email}}</p>
-                {% if user.bio %}
-                  <p>{{user.bio}}</p>
+              {% if user %}
+  							<div class="inner">
+                  <p>Name: {{user.nickname}}</p>
+                  <p>Email: {{user.email}}</p>
+                  {% if user.bio %}
+                    <p>{{user.bio}}</p>
+                    <form method = "GET">
+                      <button>Edit</button>
+                    </form>
+                  {% else %}
+                    <form method="POST">
+                      <input name = "bio" placeholder = "Bio" type = "text"></br>
+                      <button>Submit</button>
+                    </form>
+                  {% endif %}
                 {% else %}
-                  <form method="POST">
-                    <input name = "bio" placeholder = "Bio" type = "text"></br>
-                    <button>Submit</button>
-                  </form>
+                	<div class="inner">
+                    <p>Please login to see your profile</p>
+                  </div>
                 {% endif %}
-							</div>
+  							</div>
 						</section>
 					</article>
 
@@ -69,7 +78,7 @@
 							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
 						</ul>
 						<ul class="copyright">
-							<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+							<li>&copy; Meet2Eat</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
 						</ul>
 					</footer>
 
@@ -84,6 +93,5 @@
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
 
->>>>>>> ff1bfd2d5eba2f37fadf1ac92a18e3d7e8fa379a
   </body>
 </html>
