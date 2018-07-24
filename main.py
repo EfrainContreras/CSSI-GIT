@@ -61,7 +61,7 @@ class MainPage(webapp2.RequestHandler):
         user = find_or_create_user()
         log_url = get_log_inout_url(user)
 
-    
+
 
         variables = {"user": user,
                     "log_url": log_url}
@@ -107,14 +107,28 @@ class RequestHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("request.html")
         self.response.write(template.render(variables))
 
+
 class MatchesHandler(webapp2.RequestHandler):
     def get(self):
         all_users = JUser.query()
-
         all_users = all_users.fetch(10)
-        print (all_users)
-
         current_user = find_or_create_user()
+
+        variables = {"all_users": all_users,
+                     "current_user": current_user}
+        template = jinja_environment.get_template("matches.html")
+        self.response.write(template.render(variables))
+
+    def post(self):
+        all_users = JUser.query()
+        all_users = all_users.fetch(10)
+        current_user = find_or_create_user()
+
+        print "CLICKED"
+        clickedUser = self.request.get("{{user.num}}")
+        clickedUserName = self.request.get("name")
+        print clickedUser
+        print clickedUserName
 
         variables = {"all_users": all_users,
                      "current_user": current_user}
@@ -134,6 +148,7 @@ class CalendarHandler(webapp2.RequestHandler):
 
         template = jinja_environment.get_template("calendar.html")
         self.response.write(template.render())
+
 
 
 app = webapp2.WSGIApplication([
