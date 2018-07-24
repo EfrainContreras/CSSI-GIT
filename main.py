@@ -44,7 +44,6 @@ class JUser(ndb.Model):
     nickname =  ndb.StringProperty(required=True)
     email = ndb.StringProperty(required=True)
     bio = ndb.StringProperty(required=False)
-
     name = ndb.StringProperty(required=False)
     phone = ndb.StringProperty(required=False)
     location = ndb.StringProperty(required=False)
@@ -87,12 +86,6 @@ class ProfileHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("profile.html")
         self.response.write(template.render(variables))
 
-class AboutHandler(webapp2.RequestHandler):
-    def get(self):
-
-
-        template = jinja_environment.get_template("about.html")
-        self.response.write(template.render())
 
 class RequestHandler(webapp2.RequestHandler):
     def get(self):
@@ -104,11 +97,9 @@ class RequestHandler(webapp2.RequestHandler):
 
     def post(self):
         user = find_or_create_user()
-
         user.location = self.request.get("location")
         user.time = self.request.get("time")
         user.num = self.request.get("num")
-
         user.put()
 
         variables = {"user": user}
@@ -117,10 +108,25 @@ class RequestHandler(webapp2.RequestHandler):
 
 class MatchesHandler(webapp2.RequestHandler):
     def get(self):
+        all_users = JUser.query()
 
+        all_users = all_users.fetch(10)
+        print (all_users)
 
+        current_user = find_or_create_user()
+        
+        variables = {"all_users": all_users,
+                     "current_user": current_user}
         template = jinja_environment.get_template("matches.html")
+        self.response.write(template.render(variables))
+
+class AboutHandler(webapp2.RequestHandler):
+    def get(self):
+
+
+        template = jinja_environment.get_template("about.html")
         self.response.write(template.render())
+
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
