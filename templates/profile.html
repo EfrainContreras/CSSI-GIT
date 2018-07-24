@@ -64,31 +64,32 @@
                     <form method="POST">
                       <input name = "name" placeholder = "Name" type = "text"></br>
                       <input name = "phone" placeholder = "Phone" type = "text"></br>
-                      <input name = "bio" placeholder = "Bio" type = "text"></br>
+                      <textarea rows = '4' columns = '50' name = "bio" placeholder = "Bio" type = "text"></textarea></br>
 
                       <button>Submit</button>
                     </form>
                   {% endif %}
                 {% else %}
-                	<div class="inner">
-                    <p>Please login to see your profile</p>
-                  </div>
+                  <form method="POST">
+                    <input name = "bio" placeholder = "Bio" type = "text"></br>
+                    <button>Submit</button>
+                  </form>
                 {% endif %}
-  							</div>
+							</div>
 						</section>
 					</article>
 
 				<!-- Footer -->
-					<footer id="footer">
-						<ul class="icons">
-							<li><a href="https://twitter.com/meet2eat1" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="https://instagram.com/meet2eatdining" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
-
-						</ul>
-						<ul class="copyright">
-							<li>&copy; Meet2Eat</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
-						</ul>
-					</footer>
+        <footer id="footer">
+					<ul class="icons">
+						<li><a hhref="https://twitter.com/meet2eat1" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://www.facebook.com/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+						<li><a href="https://instagram.com/meet2eatdining" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+					</ul>
+					<ul class="copyright">
+						<li>&copy; Meet2Eat</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</footer>
 
 			</div>
 
