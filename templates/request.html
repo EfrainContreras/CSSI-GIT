@@ -15,7 +15,7 @@
 
 				<!-- Header -->
         <header id="header">
-          <h1><a href="/">Meet2Eat</a></h1>
+          <h1><a href="index.html">Meet2Eat</a></h1>
           <nav id="nav">
             <ul>
               <li class="special">
@@ -23,8 +23,9 @@
                 <div id="menu">
                   <ul>
                     <li><a href="/">Home</a></li>
+                    <li><a href="#">Log In</a></li>
                     <li><a href = "/profile">Profile</a></li>
-                    <li><a href="/matches">Matches</a></li>
+                    <li><a href="#">Matches</a></li>
                     <li><a href="/about">About</a></li>
                   </ul>
                 </div>
@@ -40,32 +41,46 @@
 							<p>Fill the form to find your next food buddy.</p>
 						</header>
 						<section class="wrapper style5">
-              <p>Your Requests</p>
-              {% if user.location %}
-                {{user.location}}
-              {% endif %}
+              {% if user %}
 
-              {% if user.time %}
-                {{user.time}}
-              {% endif %}
-
-              <form method = "POST">
   							<div class="inner">
-                  <input name = "location" placeholder = "Location" type = "text"></br>
-                  <input name = "Time" placeholder = "Time" type = "text"></br>
-  							</div>
-                <button>Sumbit</button>
-              </form>
+                  <p>Your Request</p>
 
+                  {% if user.location %}
+                    <p>Location: {{user.location}}</p>
+                  {% endif %}
 
+                  {% if user.num %}
+                    <p>Number of People: {{user.num}}</p>
+                  {% endif %}
+
+                  {% if user.time %}
+                    <p>Time: {{user.time}}</p>
+                    <form method = "POST">
+                      <button>Edit</button>
+                    </form>
+                  {% else %}
+                    <form method="POST">
+                      <input name = "location" placeholder = "Location" type = "text"></br>
+                      <input name = "num" placeholder = "Number of People" type = "text"></br>
+                      <input name = "time" placeholder = "Time" type = "text"></br>
+                      <button>Submit</button>
+                    </form>
+                  {% endif %}
+                {% else %}
+                	<div class="inner">
+                    <p>Please login to see the request you've made</p>
+                  </div>
+                {% endif %}
 						</section>
 					</article>
 
 				<!-- Footer -->
         <footer id="footer">
           <ul class="icons">
-            <li><a href="https://twitter.com/meet2eat1" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-            <li><a href="https://instagram.com/meet2eatdining" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+            <li><a href="https://twitter.com/?lang=en" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+            <li><a href="https://www.facebook.com/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+            <li><a href="https://www.instagram.com/?hl=en" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
           </ul>
           <ul class="copyright">
             <li>&copy; Meet2Eat</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
