@@ -149,9 +149,36 @@ class CalendarHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("calendar.html")
         self.response.write(template.render())
 
-# class ButtonPress(webapp2.RequestHandler):
-#     def post(self):
-#         pass
+class PlacesHandler(webapp2.RequestHandler):
+    def get(self):
+        params = {"user-key": "5e5eb7cd8cd86731avb324d76be57bc17",
+                  "q": "New York",
+        }
+
+        form_data = urllib.urlencode(params)
+        api_url = "http://developers.zomato.com/api/v2.1/cities?"
+        response = urllib2.urlopen(api_url + form_data)
+        content = json.loads(response.read())
+        city_id = content[0].id
+
+        params = {"user-key": "e5eb7cd8cd86731avb324d76be57bc17",
+                  "city_id": content[0].id,
+        }
+
+        form_data = urllib.urlencode(params)
+        api_url = "http://developers.zomato.com/api/v2.1/cuisines?"
+        response = urllib2.urlopen(api_url + form_data)
+        content = json.loads(response.read())
+        cuisine_name = content[0].cuisine.cuisine_name
+
+        template = jinja2_environment.get_template("places.html")
+        variables = {"cuisine_name": cuisine_name}
+        self.response.write(template.render(variables))
+
+
+
+
+
 
 app = webapp2.WSGIApplication([
     ('/', MainPage),
@@ -160,6 +187,7 @@ app = webapp2.WSGIApplication([
     ('/request', RequestHandler),
     ('/matches', MatchesHandler),
     ('/calendar', CalendarHandler),
+    ('/restaurants', PlacesHandler),
 ], debug=True)
 
 
