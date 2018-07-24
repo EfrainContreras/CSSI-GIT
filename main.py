@@ -27,17 +27,18 @@ def find_or_create_user():
          if not juser:
              juser = JUser(key=key,
                            nickname=user.nickname(),
-                           email=user.email()
+                           email=user.email(),
+                           numGoing="1"
                            )
          juser.put()
          return juser;
      return None
 
 def get_log_inout_url(user):
-     if user:
-         return users.create_logout_url('/')
-     else:
-         return users.create_login_url('/')
+    if user:
+        return users.create_logout_url('/')
+    else:
+        return users.create_login_url('/')
 
 
 # START STORE USER INFO
@@ -50,6 +51,7 @@ class JUser(ndb.Model):
     location = ndb.StringProperty(required=False)
     time = ndb.StringProperty(required=False)
     num = ndb.StringProperty(required=False)
+    numGoing = ndb.StringProperty(required=False)
 
 
 
@@ -101,6 +103,7 @@ class RequestHandler(webapp2.RequestHandler):
         user.location = self.request.get("location")
         user.time = self.request.get("time")
         user.num = self.request.get("num")
+        user.numGoing = 1
         user.put()
 
         variables = {"user": user}
@@ -124,11 +127,9 @@ class MatchesHandler(webapp2.RequestHandler):
         all_users = all_users.fetch(10)
         current_user = find_or_create_user()
 
-        print "CLICKED"
-        clickedUser = self.request.get("{{user.num}}")
-        clickedUserName = self.request.get("name")
-        print clickedUser
-        print clickedUserName
+
+        clickedUser = self.request.get("user.num")
+
 
         variables = {"all_users": all_users,
                      "current_user": current_user}

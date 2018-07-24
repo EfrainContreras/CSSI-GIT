@@ -62,9 +62,12 @@
 					      									<p>Location: {{user.location}}</p>
 					      									<p>Time: {{user.time}}</p>
 																	<p>Spaces Left: {{user.num}}</p>
-																	<p>Number of People Going: 1</p>
-																	
-																	<button class="button primary">I'll Go</button>
+																	<p>Number of People Going: {{user.numGoing}}</p>
+																	<input type=hidden value={{user.name}} name="user.name">
+																	<input type=hidden value={{user.key}} name="user.key">
+																	<input type=hidden value={{user.numGoing}} name="user.numGoing">
+
+																	<button class="button primary" value={{user.num}} name="user.num">I'll Go</button>
 																</form>
 				       								</li>
 														{% endif %}
