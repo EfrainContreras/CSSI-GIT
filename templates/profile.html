@@ -45,9 +45,16 @@
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
-                <input name = "fname" placeholder = "Name" type = "text"></br>
-                Last Name: <input name = "lname"></br>
-
+                <p>Name: {{user.nickname}}</p>
+                <p>Email: {{user.email}}</p>
+                {% if user.bio %}
+                  <p>{{user.bio}}</p>
+                {% else %}
+                  <form method="POST">
+                    <input name = "bio" placeholder = "Bio" type = "text"></br>
+                    <button>Submit</button>
+                  </form>
+                {% endif %}
 							</div>
 						</section>
 					</article>
