@@ -19,7 +19,7 @@
 
 				<!-- Header -->
 					<header id="header" class="alt">
-						<h1><a href="/">Meet2Eat</a></h1>
+						<h1><a href="http://meet2eat-dinning.appspot.com/">Meet2Eat</a></h1>
 						<nav id="nav">
 							<ul>
 								<li class="special">
@@ -27,9 +27,10 @@
 									<div id="menu">
 										<ul>
 											<li><a href="/">Home</a></li>
+											<li><a href="#">Log In</a></li>
 											<li><a href="/profile">Profile</a></li>
 											<li><a href="/request">Request</a></li>
-											<li><a href="/matches">Matches</a></li>
+											<li><a href="#">Matches</a></li>
 											<li><a href="/about">About</a></li>
 										</ul>
 									</div>
@@ -46,9 +47,9 @@
 							created by Team Powerpuff</a></p>
 							<ul class="actions special">
 								{% if user %}
-									<a href="{{log_url}}">Log Out</a>
+									<li><a href="{{log_url}}" class="button primary">Log Out</a></li>
 								{% else %}
-									<a href="{{log_url}}">Log In</a>
+									<li><a href="{{log_url}}" class="button primary">Log In</a></li>
 								{% endif %}
 							</ul>
 						</div>
@@ -136,7 +137,7 @@
  								</li>
 								<li class="icon fa-heart-o">
 									<h3>"Ahead of Their Time"</h3>
-									<p>Meet2Eat is the app we've all been waiting for, but we hadn't realized it. It's the perfect
+									<p>Meet2Eat is the app we've all been waiting for, but we haven't realized it. It's the perfect
 									marriage between eating and socializing -- something usually paired
 									up anyway, but this app's online approach brings it to the digital
 									age and beyond. </p>
@@ -155,8 +156,9 @@
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="icons">
-							<li><a href="https://twitter.com/meet2eat1" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-							<li><a href="https://instagram.com/meet2eatdining" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="https://twitter.com/?lang=en" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="https://www.facebook.com/" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="https://www.instagram.com/?hl=en" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 						</ul>
 						<ul class="copyright">
 							<li>&copy; Meet2Eat</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
