@@ -49,87 +49,25 @@
       							<header class="major" style="text-align: center; height:60px;">
       								<h2>What Are Others Saying?</h2>
       							</header>
-      							<ul class="features" style="margin: 30px;">
-      								<li class="icon fa-heart-o">
-      									<h3>"Inconcievable!"</h3>
-      									<p>Thanks to Meet2Eat, I've made many, many friends that I would
-      									I've made. There's nothing better than sharing a meal with someone.
-      									Even if they're a stranger at the beginning, by the time the check comes
-      									in, you have a connection.</p>
-      									<p> - Seemong T., <i>Seattle, WA</i></p>
-       								</li>
-      								<li class="icon fa-heart-o">
-      									<h3>"Five-Star User Experience"</h3>
-      									<p>Truly, this is a beautiful application. The interface emphasizes
-      									user accessibility, and I've never had to complain about it. While Meet2Eat
-      									is revolutionary, it's design will ensure it stays relevant and
-      									usable in the future.</p>
-      									<p> - Vanessa R., <i>Thornton, Colorado</i></p>
-       								</li>
-      								<li class="icon fa-heart-o">
-      									<h3>"Ahead of Their Time"</h3>
-      									<p>Meet2Eat is the app we've all been waiting for, but we haven't realized it. It's the perfect
-      									marriage between eating and socializing -- something usually paired
-      									up anyway, but this app's online approach brings it to the digital
-      									age and beyond. </p>
-      									<p> - Efrain C., <i>San Diego, California</i></p>
-       								</li>
-       								<li class="icon fa-heart-o">
-      									<h3>"Ingenius Innovation"</h3>
-      									<p>An original idea with fresh take on the millenial obsession with social media.</p>
-      									<p> - Carolina C., <i>Pocatello, Idaho</i></p>
-      								</li>
-                      <li class="icon fa-heart-o">
-                        <h3>"Ahead of Their Time"</h3>
-                        <p>Meet2Eat is the app we've all been waiting for, but we haven't realized it. It's the perfect
-                        marriage between eating and socializing -- something usually paired
-                        up anyway, but this app's online approach brings it to the digital
-                        age and beyond. </p>
-                        <p> - Efrain C., <i>San Diego, California</i></p>
-                      </li>
-                      <li class="icon fa-heart-o">
-                        <h3>"Ahead of Their Time"</h3>
-                        <p>Meet2Eat is the app we've all been waiting for, but we haven't realized it. It's the perfect
-                        marriage between eating and socializing -- something usually paired
-                        up anyway, but this app's online approach brings it to the digital
-                        age and beyond. </p>
-                        <p> - Efrain C., <i>San Diego, California</i></p>
-                      </li>
-                      <li class="icon fa-heart-o">
-                        <h3>"Ahead of Their Time"</h3>
-                        <p>Meet2Eat is the app we've all been waiting for, but we haven't realized it. It's the perfect
-                        marriage between eating and socializing -- something usually paired
-                        up anyway, but this app's online approach brings it to the digital
-                        age and beyond. </p>
-                        <p> - Efrain C., <i>San Diego, California</i></p>
-                      </li>
-                      <li class="icon fa-heart-o">
-                        <h3>"Ahead of Their Time"</h3>
-                        <p>Meet2Eat is the app we've all been waiting for, but we haven't realized it. It's the perfect
-                        marriage between eating and socializing -- something usually paired
-                        up anyway, but this app's online approach brings it to the digital
-                        age and beyond. </p>
-                        <p> - Efrain C., <i>San Diego, California</i></p>
-                      </li>
-                      <li class="icon fa-heart-o">
-                        <h3>"Ahead of Their Time"</h3>
-                        <p>Meet2Eat is the app we've all been waiting for, but we haven't realized it. It's the perfect
-                        marriage between eating and socializing -- something usually paired
-                        up anyway, but this app's online approach brings it to the digital
-                        age and beyond. </p>
-                        <p> - Efrain C., <i>San Diego, California</i></p>
-                      </li>
-                      <li class="icon fa-heart-o">
-                        <h3>"Ahead of Their Time"</h3>
-                        <p>Meet2Eat is the app we've all been waiting for, but we haven't realized it. It's the perfect
-                        marriage between eating and socializing -- something usually paired
-                        up anyway, but this app's online approach brings it to the digital
-                        age and beyond. </p>
-                        <p> - Efrain C., <i>San Diego, California</i></p>
-                      </li>
-      							</ul>
-
-
+										{% if current_user.name %}
+	      							<ul class="features" style="margin: 30px;">
+												{% for user in all_users %}
+													{% if user.num > 0 %}
+	      									<li class="icon fa-heart-o">
+		      									<h3>{{user.name}}</h3>
+														<p>Bio: {{user.bio}}</p>
+		      									<p>Location: {{user.location}}</p>
+		      									<p>Time: {{user.time}}</p>
+														<p>Number of People: {{user.num}}</p>
+		       								</li>
+													{% endif %}
+	      								{% endfor %}
+	      							</ul>
+										{% else %}
+										<div class="inner">
+	                    <p>Please login and create a profile before looking at the matches</p>
+	                  </div>
+										{% endif %}
 							</div>
 						</section>
 					</article>
