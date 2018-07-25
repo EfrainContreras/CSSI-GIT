@@ -31,7 +31,7 @@
 											<li><a href="/request">Request</a></li>
 											<li><a href="/matches">Matches</a></li>
 											<li><a href="/restaurants">Restaurants</a></li>
-											<li><a href = '/calendar'>Calendar</a></li>
+											<li><a href='/calendar'>Calendar</a></li>
 											<li><a href="/about">About</a></li>
 										</ul>
 									</div>
@@ -56,10 +56,12 @@
 							</ul>
 							{% if user %}
 								{% if user.name %}
-								<p>Welcome back, {{user.name}}</p>
+									<p>Welcome back, {{user.name}}</p>
 								{% else %}
-								<p>Welcome, please create a profile</p>
+									<p>Welcome, please create a profile</p>
 								{% endif %}
+							{% else %}
+								<p>Welcome</p>
 							{% endif %}
 						</div>
 						<a href="#one" class="more scrolly">Learn More</a>

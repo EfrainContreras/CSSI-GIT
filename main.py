@@ -68,6 +68,7 @@ class JUser(ndb.Model):
     time = ndb.StringProperty(required=False)
     num = ndb.StringProperty(required=False)
     numGoing = ndb.StringProperty(required=False)
+    attending = ndb.StringProperty(required=False, repeated=True)
 
 
 
@@ -138,13 +139,24 @@ class MatchesHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("matches.html")
         self.response.write(template.render(variables))
 
+
     def post(self):
         all_users = JUser.query()
         all_users = all_users.fetch(10)
         current_user = find_or_create_user()
 
 
-        clickedUser = self.request.get("user.num")
+        userEmail = self.request.get("user.email")
+        user_query = JUser.query().filter(JUser.email == userEmail).fetch(1)[0]
+
+        if not(userEmail in current_user.attending):
+            current_user.attending.append(userEmail)
+            current_user.put()
+
+        user_query.num = str(int(user_query.num) - 1)
+        user_query.numGoing = str(int(user_query.numGoing) + 1)
+
+        user_query.put()
 
 
         variables = {"all_users": all_users,
@@ -199,19 +211,18 @@ class MatchesHandler(webapp2.RequestHandler):
       except errors.HttpError, error:
         print ('An error occurred: %s' % error)
 
+
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
-
-
         template = jinja_environment.get_template("about.html")
         self.response.write(template.render())
 
 class CalendarHandler(webapp2.RequestHandler):
     def get(self):
-
-
         template = jinja_environment.get_template("calendar.html")
         self.response.write(template.render())
+
+
 
 class PlacesHandler(webapp2.RequestHandler):
     def get(self):
