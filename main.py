@@ -125,13 +125,12 @@ class RequestHandler(webapp2.RequestHandler):
         user.put()
 
         all_users = JUser.query()
-        
-        print (user.email)
         for otherUser in all_users:
             print (otherUser.attending)
             if user.email in otherUser.attending:
-                print (user.email)
                 otherUser.attending.remove(user.email)
+                otherUser.put()
+
 
 
         variables = {"user": user}
