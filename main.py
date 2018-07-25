@@ -241,7 +241,7 @@ app = webapp2.WSGIApplication([
     ('/request', RequestHandler),
     ('/matches', MatchesHandler),
     ('/calendar', CalendarHandler),
-    ('/restaurants', PlacesHandler),
+    ('/places', PlacesHandler),
 ], debug=True)
 
 
