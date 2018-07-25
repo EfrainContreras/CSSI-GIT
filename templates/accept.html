@@ -11,7 +11,6 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-		<script src="assets/js/script.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -28,11 +27,8 @@
 									<div id="menu">
 										<ul>
 											<li><a href="/">Home</a></li>
-											<li><a href="/profile">Profile</a></li>
+											<li><a href = '/profile'>Profile</a></li>
 											<li><a href="/request">Request</a></li>
-											<li><a href="/restaurants">Restaurants</a></li>
-											<li><a href='/calendar'>Calendar</a></li>
-											<li><a href="/about">About</a></li>
 											<li><a href="/about">About</a></li>
 										</ul>
 									</div>
@@ -68,7 +64,7 @@
 																	<p>Spaces Left: {{user.num}}</p>
 																	<p>Number of People Going: {{user.numGoing}}</p>
 																	<input type=hidden value="{{user.email}}" name="user.email">
-																	<button id="emailButton" class="button primary" onclick="sendEmail()">I'll Go</button>
+																	<button class="button primary">I'll Go</button>
 																</form>
 											       	</li>
 														{% endif %}

@@ -26,7 +26,6 @@
                     <li><a href = "/profile">Profile</a></li>
                     <li><a href="/matches">Matches</a></li>
                     <li><a href="/about">About</a></li>
-                    <li><a href = '/calendar'>Calendar</a></li>
                   </ul>
                 </div>
               </li>
@@ -44,7 +43,7 @@
               {% if user %}
                 {% if user.name %}
     							<div class="inner">
-                    <p>Your Request</p>
+                    <p><b><i>Your Request</i></b></p>
 
                     {% if user.location %}
                       <p>Location: {{user.location}}</p>
@@ -55,7 +54,7 @@
                     {% endif %}
 
                     {% if user.time %}
-                      <p>Time: {{user.time}}</p>
+                      <p>Date & Time: {{user.time}}</p>
                       <form method = "POST">
                         <button>Edit</button>
                       </form>
@@ -63,8 +62,11 @@
                       <form method="POST">
                         <input name = "location" placeholder = "Location" type = "text"></br>
                         <input name = "num" placeholder = "Number of People" type = "text"></br>
-                        <p>
-                          Date:  <input name = 'time' placeholder = 'Date' type = 'datetime-local' style="color: black"></br>
+                        <p style="color: gray">
+                          Date:  <input name = 'date' placeholder = 'Date' type = 'date' style="color: gray"></br>
+                       </p>
+                       <p style="color: gray">
+                          Time: <input name = 'time' placeholder = 'Time' type = 'time' style="color: gray"></br>
                        </p>
                         <button>Submit</button>
                       </form>
@@ -90,7 +92,7 @@
             <li><a href="https://www.instagram.com/meet2eatdining" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
           </ul>
           <ul class="copyright">
-            <li>&copy; Meet2Eat</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            <li>&copy; Meet2Eat</li>
           </ul>
         </footer>
 
