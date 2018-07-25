@@ -6,7 +6,7 @@
 -->
 <html>
 	<head>
-		<title>Meet2Eat About</title>
+		<title>Your Matches</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
@@ -29,8 +29,7 @@
 											<li><a href="/">Home</a></li>
 											<li><a href = '/profile'>Profile</a></li>
 											<li><a href="/request">Request</a></li>
-											<li><a href="/matches">Matches</a></li>
-											<li><a href = '/calendar'>Calendar</a></li>
+											<li><a href="/about">About</a></li>
 										</ul>
 									</div>
 								</li>
@@ -41,14 +40,42 @@
 				<!-- Main -->
 					<article id="main">
 						<header>
-							<h2>About</h2>
-							<p>Who is Meet2Eat</p>
+							<h2>Your Matches</h2>
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
-
-								<p>Success!!</p>
-
+                <section id="three" class="inner">
+      						<div class="inner">
+      							<header class="major" style="text-align: center; height:60px;">
+      								<h2>What Are Others Saying?</h2>
+      							</header>
+										{% if current_user.name %}
+	      							<ul class="features" style="margin: 30px;">
+												{% for user in all_users %}
+													{% if not user.email in current_user.attending %}
+														{% if user.num != "0" and current_user != user %}
+										      		<li class="icon fa-heart-o 2">
+																<form method="POST">
+												  				<h3>{{user.name}}</h3>
+																	<p>{{email}}</p>
+																	<p>Bio: {{user.bio}}</p>
+							      							<p>Location: {{user.location}}</p>
+							      							<p>Date & Time: {{user.time}}</p>
+																	<p>Spaces Left: {{user.num}}</p>
+																	<p>Number of People Going: {{user.numGoing}}</p>
+																	<input type=hidden value="{{user.email}}" name="user.email">
+																	<button class="button primary">I'll Go</button>
+																</form>
+											       	</li>
+														{% endif %}
+													{% endif %}
+	      								{% endfor %}
+	      							</ul>
+										{% else %}
+										<div class="inner">
+	                    <p>Please login and create a profile before looking at the matches</p>
+	                  </div>
+									{% endif %}
 							</div>
 						</section>
 					</article>
@@ -56,8 +83,8 @@
 				<!-- Footer -->
 				<footer id="footer">
 					<ul class="icons">
-						<li><a href="https://twitter.com/meet2eat1" target="_blank" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
-						<li><a href="https://instagram.com/meet2eatdining" target="_blank" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+						<li><a href="https://twitter.com/meet2eat1" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+						<li><a href="https://instagram.com/meet2eatdining" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
 					</ul>
 					<ul class="copyright">
 						<li>&copy; Meet2Eat</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
@@ -75,6 +102,6 @@
 			<script src="assets/js/breakpoints.min.js"></script>
 			<script src="assets/js/util.js"></script>
 			<script src="assets/js/main.js"></script>
-
+			<script src="assets/js/script.js"></script>
 	</body>
 </html>
