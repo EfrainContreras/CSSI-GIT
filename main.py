@@ -50,6 +50,8 @@ class JUser(ndb.Model):
     location = ndb.StringProperty(required=False)
     time = ndb.StringProperty(required=False)
     num = ndb.StringProperty(required=False)
+    numGoing = ndb.StringProperty(required=False)
+    attending = ndb.StringProperty(required=False, repeated=True)
 
 
 
@@ -101,6 +103,7 @@ class RequestHandler(webapp2.RequestHandler):
         user.location = self.request.get("location")
         user.time = self.request.get("time")
         user.num = self.request.get("num")
+        user.numGoing = "1"
         user.put()
 
         variables = {"user": user}
@@ -119,6 +122,7 @@ class MatchesHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("matches.html")
         self.response.write(template.render(variables))
 
+
     def post(self):
         all_users = JUser.query()
         all_users = all_users.fetch(10)
@@ -132,22 +136,22 @@ class MatchesHandler(webapp2.RequestHandler):
 
         variables = {"all_users": all_users,
                      "current_user": current_user}
+
         template = jinja_environment.get_template("matches.html")
         self.response.write(template.render(variables))
 
+
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
-
-
         template = jinja_environment.get_template("about.html")
         self.response.write(template.render())
 
 class CalendarHandler(webapp2.RequestHandler):
     def get(self):
-
-
         template = jinja_environment.get_template("calendar.html")
         self.response.write(template.render())
+
+
 
 class PlacesHandler(webapp2.RequestHandler):
     def get(self):
