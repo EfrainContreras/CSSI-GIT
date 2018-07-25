@@ -117,7 +117,12 @@ class RequestHandler(webapp2.RequestHandler):
     def post(self):
         user = find_or_create_user()
         user.location = self.request.get("location")
-        user.time = self.request.get("time")
+        the_time = str(self.request.get ("time"))
+        if the_time[11:13] > 12:
+            appendix = 'PM'
+        else:
+            appendix = 'AM'
+        user.time =  the_time[5:7] + '/' + the_time[8:10] + '/' + the_time [:4] + ' ' + the_time[11:] + appendix
         user.num = self.request.get("num")
         user.numGoing = "1"
         user.put()
@@ -143,6 +148,16 @@ class MatchesHandler(webapp2.RequestHandler):
         all_users = JUser.query()
         all_users = all_users.fetch(10)
         current_user = find_or_create_user()
+
+        print ("CLICKED")
+        clickedUser = self.request.get("{{user.num}}")
+        clickedUserName = self.request.get("name")
+        print (clickedUser)
+        print (clickedUserName)
+
+        variables = {"all_users": all_users,
+                     "current_user": current_user}
+        self.SendMessage(clickedUserName, self.CreateMessage())
 
         userEmail = self.request.get("user.email")
         user_query = JUser.query().filter(JUser.email == userEmail).fetch(1)[0]
