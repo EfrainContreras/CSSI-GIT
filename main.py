@@ -144,15 +144,15 @@ class MatchesHandler(webapp2.RequestHandler):
         all_users = all_users.fetch(10)
         current_user = find_or_create_user()
 
-        print "CLICKED"
+        print ("CLICKED")
         clickedUser = self.request.get("{{user.num}}")
         clickedUserName = self.request.get("name")
-        print clickedUser
-        print clickedUserName
+        print (clickedUser)
+        print (clickedUserName)
 
         variables = {"all_users": all_users,
                      "current_user": current_user}
-        self.SendMessage(JUser.email, self.CreateMessage())
+        self.SendMessage(clickedUserName, self.CreateMessage())
         self.response.write(jinja_environment.get_template("success.html").render())
 
     def CreateMessage(self):
@@ -167,7 +167,7 @@ class MatchesHandler(webapp2.RequestHandler):
         An object containing a base64url encoded email object.
       """
       message = MIMEText("This is an email message")
-      message['to'] = "me"
+      message['to'] = self.request.get('name')
       message['from'] = "meet2eatdining@gmail.com"
       message['subject'] = "Your Meet2Eat Request"
       return {'raw': base64.urlsafe_b64encode(message.as_string())}
