@@ -53,20 +53,12 @@
 										{% if current_user.name %}
 	      							<ul class="features" style="margin: 30px;">
 												{% for user in all_users %}
-<<<<<<< HEAD
-													{% if user.num > 0 %}
-														{% if current_user != user %}
-			      									<li class="icon fa-heart-o 2">
-																<form method="POST">
-					      									<h3>{{user.name}}</h3>
-=======
 													{% if not user.email in current_user.attending %}
 														{% if user.num != "0" and current_user != user %}
-					      							<li class="icon fa-heart-o 2">
+										      		<li class="icon fa-heart-o 2">
 																<form method="POST">
-							      							<h3>{{user.name}}</h3>
+												  				<h3>{{user.name}}</h3>
 																	<p>{{email}}</p>
->>>>>>> eb3aee264440f6fcb3ecb8f525a4fb34a7055698
 																	<p>Bio: {{user.bio}}</p>
 							      							<p>Location: {{user.location}}</p>
 							      							<p>Time: {{user.time}}</p>
@@ -75,7 +67,7 @@
 																	<input type=hidden value="{{user.email}}" name="user.email">
 																	<button class="button primary">I'll Go</button>
 																</form>
-						       						</li>
+											       	</li>
 														{% endif %}
 													{% endif %}
 	      								{% endfor %}
@@ -84,7 +76,7 @@
 										<div class="inner">
 	                    <p>Please login and create a profile before looking at the matches</p>
 	                  </div>
-										{% endif %}
+									{% endif %}
 							</div>
 						</section>
 					</article>

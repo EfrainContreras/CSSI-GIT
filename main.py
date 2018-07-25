@@ -144,14 +144,23 @@ class MatchesHandler(webapp2.RequestHandler):
         all_users = all_users.fetch(10)
         current_user = find_or_create_user()
 
-        print "CLICKED"
-        clickedUser = self.request.get("{{user.num}}")
-        clickedUserName = self.request.get("name")
-        print clickedUser
-        print clickedUserName
+        userEmail = self.request.get("user.email")
+        user_query = JUser.query().filter(JUser.email == userEmail).fetch(1)[0]
+
+        if not(userEmail in current_user.attending):
+            current_user.attending.append(userEmail)
+            current_user.put()
+
+        user_query.num = str(int(user_query.num) - 1)
+        user_query.numGoing = str(int(user_query.numGoing) + 1)
+
+        user_query.put()
 
         variables = {"all_users": all_users,
                      "current_user": current_user}
+        template = jinja_environment.get_template("matches.html")
+        self.response.write(template.render(variables))
+
         self.SendMessage(JUser.email, self.CreateMessage())
         self.response.write(jinja_environment.get_template("success.html").render())
 
