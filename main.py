@@ -66,6 +66,7 @@ class JUser(ndb.Model):
     phone = ndb.StringProperty(required=False)
     location = ndb.StringProperty(required=False)
     time = ndb.StringProperty(required=False)
+    date = ndb.StringProperty(required=False)
     num = ndb.StringProperty(required=False)
     numGoing = ndb.StringProperty(required=False)
     attending = ndb.StringProperty(required=False, repeated=True)
