@@ -118,8 +118,8 @@ class RequestHandler(webapp2.RequestHandler):
     def post(self):
         user = find_or_create_user()
         user.location = self.request.get("location")
-        user.time = self.request.get("time")
-
+        user.date = self.request.get('date')
+        user.time =  self.request.get('time')
         user.num = self.request.get("num")
         user.numGoing = "1"
         user.put()
@@ -130,7 +130,6 @@ class RequestHandler(webapp2.RequestHandler):
             if user.email in otherUser.attending:
                 otherUser.attending.remove(user.email)
                 otherUser.put()
-
 
 
         variables = {"user": user}
