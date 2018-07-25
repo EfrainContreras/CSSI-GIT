@@ -117,12 +117,8 @@ class RequestHandler(webapp2.RequestHandler):
     def post(self):
         user = find_or_create_user()
         user.location = self.request.get("location")
-        the_time = str(self.request.get ("time"))
-        if the_time[11:13] > 12:
-            appendix = 'PM'
-        else:
-            appendix = 'AM'
-        user.time =  the_time[5:7] + '/' + the_time[8:10] + '/' + the_time [:4] + ' ' + the_time[11:] + appendix
+        user.date = self.request.get('date')
+        user.time =  self.request.get('time')
         user.num = self.request.get("num")
         user.numGoing = "1"
         user.put()
