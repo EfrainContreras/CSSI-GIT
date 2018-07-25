@@ -17,10 +17,11 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from apiclient.discovery import build
 from google.appengine.ext import vendor
+from google.appengine.api import mail
 from httplib2 import Http
 from oauth2client import file, client, tools
-
 from apiclient import errors
+
 
 vendor.add('lib')
 
@@ -123,6 +124,16 @@ class RequestHandler(webapp2.RequestHandler):
         user.numGoing = "1"
         user.put()
 
+        all_users = JUser.query()
+
+        print (user.email)
+        for otherUser in all_users:
+            print (otherUser.attending)
+            if user.email in otherUser.attending:
+                print (user.email)
+                otherUser.attending.remove(user.email)
+
+
         variables = {"user": user}
         template = jinja_environment.get_template("request.html")
         self.response.write(template.render(variables))
@@ -145,16 +156,6 @@ class MatchesHandler(webapp2.RequestHandler):
         all_users = all_users.fetch(10)
         current_user = find_or_create_user()
 
-        print ("CLICKED")
-        clickedUser = self.request.get("{{user.num}}")
-        clickedUserName = self.request.get("name")
-        print (clickedUser)
-        print (clickedUserName)
-
-        variables = {"all_users": all_users,
-                     "current_user": current_user}
-        self.SendMessage(clickedUserName, self.CreateMessage())
-
         userEmail = self.request.get("user.email")
         user_query = JUser.query().filter(JUser.email == userEmail).fetch(1)[0]
 
@@ -172,56 +173,7 @@ class MatchesHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("matches.html")
         self.response.write(template.render(variables))
 
-        self.SendMessage(JUser.email, self.CreateMessage())
-        self.response.write(jinja_environment.get_template("success.html").render())
-
-    def CreateMessage(self):
-      """Create a message for an email.
-      Args:
-        sender: Email address of the sender.
-        to: Email address of the receiver.
-        subject: The subject of the email message.
-        message_text: The text of the email message.
-
-      Returns:
-        An object containing a base64url encoded email object.
-      """
-      message = MIMEText("This is an email message")
-      message['to'] = self.request.get('name')
-      message['from'] = "meet2eatdining@gmail.com"
-      message['subject'] = "Your Meet2Eat Request"
-      return {'raw': base64.urlsafe_b64encode(message.as_string())}
-
-
-    def SendMessage(self, user_id, message):
-      """Send an email message.
-
-      Args:
-        service: Authorized Gmail API service instance.
-        user_id: User's email address. The special value "me"
-        can be used to indicate the authenticated user.
-        message: Message to be sent.
-
-      Returns:
-        Sent Message.
-      """
-      SCOPES = 'https://www.googleapis.com/auth/gmail.readonly'
-      store = file.Storage('token1.json')
-      creds = store.get()
-      if not creds or creds.invalid:
-        flow = client.flow_from_clientsecrets('credentials1.json', SCOPES)
-        creds = tools.run_flow(flow, store)
-      service = build('gmail', 'v1', http=creds.authorize(Http()))
-
-      variable =  "966292355609-d9cnncltvbavej7voii1ld242f4v6245.apps.googleusercontent.com"
-      try:
-        message = (service.users().messages().send(userId=user_id, body=message)
-                   .execute())
-        print ('Message Id: %s' % message['id'])
-        return message
-      except errors.HttpError, error:
-        print ('An error occurred: %s' % error)
-
+        mail.send_mail(sender=current_user.email, to=userEmail, subject="Meet2Eat", body=""" Your Meet2Eat request has been accepted by """ + current_user.name)
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):

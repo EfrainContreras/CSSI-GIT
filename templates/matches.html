@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="assets/js/script.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -64,7 +65,7 @@
 																	<p>Spaces Left: {{user.num}}</p>
 																	<p>Number of People Going: {{user.numGoing}}</p>
 																	<input type=hidden value="{{user.email}}" name="user.email">
-																	<button class="button primary">I'll Go</button>
+																	<button id="emailButton" class="button primary" onclick="sendEmail()">I'll Go</button>
 																</form>
 											       	</li>
 														{% endif %}
