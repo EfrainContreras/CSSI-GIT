@@ -27,18 +27,17 @@ def find_or_create_user():
          if not juser:
              juser = JUser(key=key,
                            nickname=user.nickname(),
-                           email=user.email(),
-                           numGoing="1"
+                           email=user.email()
                            )
          juser.put()
          return juser;
      return None
 
 def get_log_inout_url(user):
-    if user:
-        return users.create_logout_url('/')
-    else:
-        return users.create_login_url('/')
+     if user:
+         return users.create_logout_url('/')
+     else:
+         return users.create_login_url('/')
 
 
 # START STORE USER INFO
@@ -51,7 +50,6 @@ class JUser(ndb.Model):
     location = ndb.StringProperty(required=False)
     time = ndb.StringProperty(required=False)
     num = ndb.StringProperty(required=False)
-    numGoing = ndb.StringProperty(required=False)
 
 
 
@@ -103,7 +101,6 @@ class RequestHandler(webapp2.RequestHandler):
         user.location = self.request.get("location")
         user.time = self.request.get("time")
         user.num = self.request.get("num")
-        user.numGoing = 1
         user.put()
 
         variables = {"user": user}
@@ -127,9 +124,11 @@ class MatchesHandler(webapp2.RequestHandler):
         all_users = all_users.fetch(10)
         current_user = find_or_create_user()
 
-
-        clickedUser = self.request.get("user.num")
-
+        print "CLICKED"
+        clickedUser = self.request.get("{{user.num}}")
+        clickedUserName = self.request.get("name")
+        print clickedUser
+        print clickedUserName
 
         variables = {"all_users": all_users,
                      "current_user": current_user}
@@ -152,7 +151,19 @@ class CalendarHandler(webapp2.RequestHandler):
 
 class PlacesHandler(webapp2.RequestHandler):
     def get(self):
-        params = {"user-key": "5e5eb7cd8cd86731avb324d76be57bc17",
+
+        """request_headers = {"Accept-Language": "en-US,en;q=0.9",
+                           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36",
+                           "Accept": "application/json",
+                           "Referer": "https://developers.zomato.com/",
+                           "Connection": "keep-alive"
+        }
+
+        request = urllib2.Request("https://developers.zomato.com/", headers=request_headers)
+        contents = urllib2.urlopen(request).read()
+        print contents
+
+        params = {
                   "q": "New York",
         }
 
@@ -162,11 +173,11 @@ class PlacesHandler(webapp2.RequestHandler):
         content = json.loads(response.read())
         city_id = content[0].id
 
-        params = {"user-key": "e5eb7cd8cd86731avb324d76be57bc17",
+        params = {
                   "city_id": content[0].id,
         }
 
-        form_data = urllib.urlencode(params)
+        form_data = urllib.urlencode(results)
         api_url = "http://developers.zomato.com/api/v2.1/cuisines?"
         response = urllib2.urlopen(api_url + form_data)
         content = json.loads(response.read())
@@ -174,9 +185,9 @@ class PlacesHandler(webapp2.RequestHandler):
 
         template = jinja2_environment.get_template("places.html")
         variables = {"cuisine_name": cuisine_name}
-        self.response.write(template.render(variables))
-
-
+        self.response.write(template.render(variables))"""
+        template = jinja_environment.get_template("places.html")
+        self.response.write(template.render())
 
 
 
