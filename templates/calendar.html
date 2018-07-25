@@ -42,10 +42,41 @@
 				<!-- Main -->
 					<article id="main">
 						<header>
-							<h2>Calendar</h2>
+							<h2>Your Calendar</h2>
 						</header>
 						<section class="wrapper style5">
 							<div class="inner">
+
+								<section id="three" class="inner">
+      						<div class="inner">
+      							<header class="major" style="text-align: center; height:60px;">
+      								<h2>These are your upcoming events</h2>
+      							</header>
+										{% if current_user.name %}
+	      							<ul class="features" style="margin: 30px;">
+												{% for user in all_users %}
+													{% if user.email in current_user.attending %}
+														{% if user.num != "0" and current_user != user %}
+										      		<li class="icon fa-heart-o 2">
+																<form method="POST">
+												  				<h3>{{user.name}}</h3>
+																	<p>{{email}}</p>
+																	<p>Bio: {{user.bio}}</p>
+							      							<p>Location: {{user.location}}</p>
+							      							<p>Date & Time: {{user.date}} at {{user.time}}</p>
+																	<p>Spaces Left: {{user.num}}</p>
+																	<p>Number of People Going: {{user.numGoing}}</p>
+																</form>
+											       	</li>
+														{% endif %}
+													{% endif %}
+	      								{% endfor %}
+	      							</ul>
+										{% else %}
+										<div class="inner">
+	                    <p>Please login and create a profile before looking at the matches</p>
+	                  </div>
+									{% endif %}
 
 							</div>
 						</section>

@@ -179,55 +179,27 @@ class MatchesHandler(webapp2.RequestHandler):
 
         mail.send_mail(sender="meet2eatdining@gmail.com", to=userEmail, subject="Meet2Eat", body=""" Your Meet2Eat request has been accepted by """ + current_user.name)
 
+
+class CalendarHandler(webapp2.RequestHandler):
+    def get(self):
+        all_users = JUser.query()
+        all_users = all_users.fetch(10)
+        current_user = find_or_create_user()
+
+
+        variables = {"all_users": all_users,
+                     "current_user": current_user}
+        template = jinja_environment.get_template("calendar.html")
+        self.response.write(template.render(variables))
+
+
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
         template = jinja_environment.get_template("about.html")
         self.response.write(template.render())
 
-class CalendarHandler(webapp2.RequestHandler):
-    def get(self):
-        template = jinja_environment.get_template("calendar.html")
-        self.response.write(template.render())
-
-
-
 class PlacesHandler(webapp2.RequestHandler):
     def get(self):
-
-        """request_headers = {"Accept-Language": "en-US,en;q=0.9",
-                           "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36",
-                           "Accept": "application/json",
-                           "Referer": "https://developers.zomato.com/",
-                           "Connection": "keep-alive"
-        }
-
-        request = urllib2.Request("https://developers.zomato.com/", headers=request_headers)
-        contents = urllib2.urlopen(request).read()
-        print contents
-
-        params = {
-                  "q": "New York",
-        }
-
-        form_data = urllib.urlencode(params)
-        api_url = "http://developers.zomato.com/api/v2.1/cities?"
-        response = urllib2.urlopen(api_url + form_data)
-        content = json.loads(response.read())
-        city_id = content[0].id
-
-        params = {
-                  "city_id": content[0].id,
-        }
-
-        form_data = urllib.urlencode(results)
-        api_url = "http://developers.zomato.com/api/v2.1/cuisines?"
-        response = urllib2.urlopen(api_url + form_data)
-        content = json.loads(response.read())
-        cuisine_name = content[0].cuisine.cuisine_name
-
-        template = jinja2_environment.get_template("places.html")
-        variables = {"cuisine_name": cuisine_name}
-        self.response.write(template.render(variables))"""
         template = jinja_environment.get_template("places.html")
         self.response.write(template.render())
 
