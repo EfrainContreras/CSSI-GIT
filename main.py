@@ -8,6 +8,7 @@ import urllib2
 import base64
 import mimetypes
 import smtplib
+import datetime
 from google.appengine.ext import ndb
 from google.appengine.api import users
 from email.mime.audio import MIMEAudio
@@ -133,7 +134,11 @@ class RequestHandler(webapp2.RequestHandler):
                 otherUser.put()
 
 
-        variables = {"user": user}
+        current_date = str(datetime.datetime.today()).split()[0]
+
+
+        variables = {"user": user,
+                     "current_date": current_date}
         template = jinja_environment.get_template("request.html")
         self.response.write(template.render(variables))
 
@@ -172,7 +177,7 @@ class MatchesHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("matches.html")
         self.response.write(template.render(variables))
 
-        mail.send_mail(sender=current_user.email, to=userEmail, subject="Meet2Eat", body=""" Your Meet2Eat request has been accepted by """ + current_user.name)
+        mail.send_mail(sender="meet2eatdining@gmail.com", to=userEmail, subject="Meet2Eat", body=""" Your Meet2Eat request has been accepted by """ + current_user.name)
 
 class AboutHandler(webapp2.RequestHandler):
     def get(self):
