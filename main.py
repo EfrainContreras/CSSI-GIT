@@ -194,7 +194,7 @@ class MatchesHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("matches.html")
         self.response.write(template.render(variables))
 
-        mail.send_mail(sender="meet2eatdining@gmail.com", to=userEmail, subject="Meet2Eat", body=current_user.name + " has accepted your Meet2Eat request to eat at " + user_query.address + " at " + user_query.time + " on " + {{user_query.date}})
+        mail.send_mail(sender="meet2eatdining@gmail.com", to=userEmail, subject="Meet2Eat", body=current_user.name + " has accepted your Meet2Eat request to eat at " + user_query.address + " at " + user_query.time + " on " + user_query.date)
 
 
 class CalendarHandler(webapp2.RequestHandler):
