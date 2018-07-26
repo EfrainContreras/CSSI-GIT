@@ -59,7 +59,7 @@
 	      							<ul class="features" style="margin: 30px;">
 												{% for user in all_users %}
 													{% if not user.email in current_user.attending %}
-														{% if user.gender == current_user.genderPref or current_user.genderPref == "Either" %}
+														{% if current_user.gender == user.genderPref or user.genderPref == "Either" %}
 															{% if user.num != "0" and current_user != user %}
 											      		<li class="icon fa-heart-o 2">
 																	<form method="POST">
