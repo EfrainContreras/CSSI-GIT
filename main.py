@@ -152,18 +152,20 @@ class RequestHandler(webapp2.RequestHandler):
 class MatchesHandler(webapp2.RequestHandler):
     def get(self):
         all_users = JUser.query()
-        all_users = all_users.fetch(10)
+        all_users = all_users.fetch()
         current_user = find_or_create_user()
 
         variables = {"all_users": all_users,
                      "current_user": current_user}
+        print('>>>>')
+        print (str(len (all_users)))
         template = jinja_environment.get_template("matches.html")
         self.response.write(template.render(variables))
 
 
     def post(self):
         all_users = JUser.query()
-        all_users = all_users.fetch(10)
+        all_users = all_users.fetch()
         current_user = find_or_create_user()
 
         userEmail = self.request.get("user.email")
@@ -189,7 +191,7 @@ class MatchesHandler(webapp2.RequestHandler):
 class CalendarHandler(webapp2.RequestHandler):
     def get(self):
         all_users = JUser.query()
-        all_users = all_users.fetch(10)
+        all_users = all_users.fetch()
         current_user = find_or_create_user()
 
         current_date = str(datetime.datetime.today()).split()[0]
