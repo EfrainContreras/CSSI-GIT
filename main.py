@@ -71,6 +71,10 @@ class JUser(ndb.Model):
     num = ndb.StringProperty(required=False)
     numGoing = ndb.StringProperty(required=False)
     attending = ndb.StringProperty(required=False, repeated=True)
+    genderPref = ndb.StringProperty(required=False)
+    gender = ndb.StringProperty(required=False)
+
+
 
 
 
@@ -102,6 +106,7 @@ class ProfileHandler(webapp2.RequestHandler):
         user.name = self.request.get("name")
         user.bio = self.request.get("bio")
         user.phone = self.request.get("phone")
+        user.gender = self.request.get("gender")
         user.put()
 
         variables = {"user": user}
@@ -123,6 +128,7 @@ class RequestHandler(webapp2.RequestHandler):
         user.date = self.request.get('date')
         user.time =  self.request.get('time')
         user.num = self.request.get("num")
+        user.genderPref = self.request.get("genderPref")
         user.numGoing = "1"
         user.put()
 
@@ -146,18 +152,20 @@ class RequestHandler(webapp2.RequestHandler):
 class MatchesHandler(webapp2.RequestHandler):
     def get(self):
         all_users = JUser.query()
-        all_users = all_users.fetch(10)
+        all_users = all_users.fetch()
         current_user = find_or_create_user()
 
         variables = {"all_users": all_users,
                      "current_user": current_user}
+        print('>>>>')
+        print (str(len (all_users)))
         template = jinja_environment.get_template("matches.html")
         self.response.write(template.render(variables))
 
 
     def post(self):
         all_users = JUser.query()
-        all_users = all_users.fetch(10)
+        all_users = all_users.fetch()
         current_user = find_or_create_user()
 
         userEmail = self.request.get("user.email")
@@ -183,12 +191,14 @@ class MatchesHandler(webapp2.RequestHandler):
 class CalendarHandler(webapp2.RequestHandler):
     def get(self):
         all_users = JUser.query()
-        all_users = all_users.fetch(10)
+        all_users = all_users.fetch()
         current_user = find_or_create_user()
 
+        current_date = str(datetime.datetime.today()).split()[0]
 
         variables = {"all_users": all_users,
-                     "current_user": current_user}
+                     "current_user": current_user,
+                     "current_date": current_date}
         template = jinja_environment.get_template("calendar.html")
         self.response.write(template.render(variables))
 

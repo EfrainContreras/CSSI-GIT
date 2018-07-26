@@ -49,8 +49,13 @@
 						<section class="wrapper style5">
               {% if user %}
   							<div class="inner">
+
                   {% if user.name %}
                     <p>Name: {{user.name}}</p>
+                  {% endif %}
+
+                  {% if user.gender %}
+                    <p>Gender: {{user.gender}}</p>
                   {% endif %}
 
                   <p>Email: {{user.email}}</p>
@@ -66,6 +71,10 @@
                     </form>
                   {% else %}
                     <form method="POST">
+                      <select name="gender">
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                      </select></br>
                       <input name = "name" placeholder = "Name" type = "text"></br>
                       <input name = "phone" placeholder = "Phone" type = "text"></br>
                       <textarea rows = '4' columns = '50' name = "bio" placeholder = "Bio" type = "text"></textarea></br>
