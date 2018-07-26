@@ -67,7 +67,7 @@
                       </form>
                     {% else %}
                       <form method="POST">
-                        
+
                         <select name="genderPref">
                           <option value="Either">No Gender Preference</option>
                           <option value="Male">Male</option>
@@ -77,10 +77,10 @@
                         <input name = "location" placeholder = "Location" type = "text"></br>
                         <input name = "num" placeholder = "Number of People" type = "text"></br>
                         <p style="color: gray">
-                          Date:  <input name = 'date' placeholder = 'Date' type = 'date' min={{current_date}} style="color: black"></br>
+                          Date:  <input name = 'date' type = 'date' min={{current_date}} style="color: gray"></br>
                        </p>
                        <p style="color: gray">
-                          Time: <input name = 'time' placeholder = 'Time' type = 'time' style="color: gray"></br>
+                          Time: <input name = 'time' type = 'time' style="color: gray"></br>
                        </p>
                         <button>Submit</button>
                       </form>
