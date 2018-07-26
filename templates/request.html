@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
+    <script src="assets/js/maps.js"></script>
   </head>
   <body class="is-preload">
 
@@ -53,8 +53,8 @@
                       <p>Gender Preference: {{user.genderPref}}</p>
                     {% endif %}
 
-                    {% if user.location %}
-                      <p>Location: {{user.location}}</p>
+                    {% if user.address %}
+                      <p>Location: {{user.address}}</p>
                     {% endif %}
 
                     {% if user.num %}
@@ -75,7 +75,33 @@
                           <option value="Female">Female</option>
                         </select></br>
 
-                        <input name = "location" placeholder = "Location" type = "text" required></br>
+                        <div id="locationField">
+                          <input id="autocomplete" placeholder="Enter where you want to eat" onFocus="geolocate()" type="text" name="address"></input>
+                        </div>
+
+                        <table id="address">
+                          <tr>
+                            <td class="label">Street Adress</td>
+                            <td class="slimField"><input class="field" id="street_number" disabled="true"></input></td>
+                            <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"></input></td>
+                          </tr>
+                          <tr>
+                            <td class="label">City</td>
+                            <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true" name="city"></input></td>
+                          </tr>
+                          <tr>
+                            <td class="label">State</td>
+                            <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true" name="state"></input></td>
+                            <td class="label">Zip code</td>
+                            <td class="wideField"><input class="field" id="postal_code" disabled="true"></input></td>
+                          </tr>
+                          <tr>
+                            <td class="label">Country</td>
+                            <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input></td>
+                          </tr>
+                        </table>
+
+
                         <input name = "num" placeholder = "Number of People" type = "text" required></br>
 
                        <p style="color: gray">
@@ -99,6 +125,8 @@
                     <p>Please login to see the request you've made</p>
                   </div>
                 {% endif %}
+
+              <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnjNIECrdVUpd6nc_VkpBUwLGubtlu7P8&libraries=places&callback=initAutocomplete" async defer></script>
 						</section>
 					</article>
 

@@ -73,6 +73,10 @@ class JUser(ndb.Model):
     attending = ndb.StringProperty(required=False, repeated=True)
     genderPref = ndb.StringProperty(required=False)
     gender = ndb.StringProperty(required=False)
+    city = ndb.StringProperty(required=False)
+    state = ndb.StringProperty(required=False)
+    address = ndb.StringProperty(required=False)
+
 
 
 
@@ -130,6 +134,10 @@ class RequestHandler(webapp2.RequestHandler):
         user.num = self.request.get("num")
         user.genderPref = self.request.get("genderPref")
         user.numGoing = "1"
+        user.city = self.request.get("city")
+        user.state = self.request.get("state")
+        user.address = self.request.get("address")
+
         user.put()
 
         all_users = JUser.query()
@@ -157,8 +165,7 @@ class MatchesHandler(webapp2.RequestHandler):
 
         variables = {"all_users": all_users,
                      "current_user": current_user}
-        print('>>>>')
-        print (str(len (all_users)))
+
         template = jinja_environment.get_template("matches.html")
         self.response.write(template.render(variables))
 
@@ -213,7 +220,21 @@ class PlacesHandler(webapp2.RequestHandler):
         template = jinja_environment.get_template("places.html")
         self.response.write(template.render())
 
+class SuccessHandler(webapp2.RequestHandler):
+    def get(self):
+        template = jinja_environment.get_template("success.html")
+        self.response.write(template.render())
 
+    def post(self):
+        current_user = find_or_create_user()
+        current_user.city = self.request.get("city")
+        current_user.state = self.request.get("state")
+        current_user.state = self.request.get("address")
+
+        current_user.put()
+
+        template = jinja_environment.get_template("success.html")
+        self.response.write(template.render())
 
 
 app = webapp2.WSGIApplication([
@@ -224,6 +245,7 @@ app = webapp2.WSGIApplication([
     ('/matches', MatchesHandler),
     ('/calendar', CalendarHandler),
     ('/places', PlacesHandler),
+    ("/success", SuccessHandler)
 ], debug=True)
 
 

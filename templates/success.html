@@ -11,6 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<script src="assets/js/maps.js"></script>
 	</head>
 	<body class="is-preload">
 
@@ -49,8 +50,36 @@
 						<section class="wrapper style5">
 							<div class="inner">
 
-								<p>Success!!</p>
+								<form method="POST">
+									<table id="address">
 
+										<div id="locationField">
+											<input id="autocomplete" name="address" placeholder="Enter your address" onFocus="geolocate()" type="text"></input>
+										</div>
+
+									  <tr>
+									    <td class="label">Street Adress</td>
+									    <td class="slimField"><input class="field"  disabled="true"></input></td>
+									    <td class="wideField" colspan="2"><input class="field" disabled="true"></input></td>
+										</tr>
+									  <tr>
+									    <td class="label">City</td>
+									    <td class="wideField" colspan="3"><input class="field" disabled="true" name="city"></input></td>
+									  </tr>
+									  <tr>
+									    <td class="label">State</td>
+									    <td class="slimField"><input class="field" disabled="true" name="state"></input></td>
+									    <td class="label">Zip code</td>
+									    <td class="wideField"><input class="field" disabled="true"></input></td>
+									  </tr>
+									  <tr>
+									    <td class="label">Country</td>
+									    <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input></td>
+									  </tr>
+									</table>
+									<button>Submit</button>
+								</form>
+								<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnjNIECrdVUpd6nc_VkpBUwLGubtlu7P8&libraries=places&callback=initAutocomplete" async defer></script>
 							</div>
 						</section>
 					</article>
