@@ -68,21 +68,21 @@
                     {% else %}
                       <form method="POST">
 
-                        <select name="genderPref">
+                        <select name="genderPref" required>
                           <option value="Either">No Gender Preference</option>
                           <option value="Male">Male</option>
                           <option value="Female">Female</option>
                         </select></br>
 
-                        <input name = "location" placeholder = "Location" type = "text"></br>
-                        <input name = "num" placeholder = "Number of People" type = "text"></br>
+                        <input name = "location" placeholder = "Location" type = "text" required></br>
+                        <input name = "num" placeholder = "Number of People" type = "text" required></br>
 
                        <p style="color: gray">
-                          Date: <input name = 'date' type = 'date' style="color: gray"></br>
+                          Date: <input name = 'date' type = 'date' style="color: gray" required></br>
                        </p>
 
                        <p style="color: gray">
-                          Time: <input name = 'time' type = 'time' style="color: gray"></br>
+                          Time: <input name = 'time' type = 'time' style="color: gray" required></br>
                        </p>
                         <button>Submit</button>
                       </form>
