@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link rel="icon" href="http://www.clker.com/cliparts/L/2/X/P/Z/S/plate-fork-spoon-no-text-md.png">
     <title>Your Profile</title>
   </head>
   <body>
@@ -45,6 +44,7 @@
 					<article id="main">
 						<header>
 							<h2>Profile</h2>
+              <p>Make or edit your profile and be apart of the world of Meet2Eat.</p>
 						</header>
 						<section class="wrapper style5">
               {% if user %}
@@ -74,10 +74,9 @@
                     </form>
                   {% endif %}
                 {% else %}
-                  <form method="POST">
-                    <input name = "bio" placeholder = "Bio" type = "text"></br>
-                    <button>Submit</button>
-                  </form>
+                	<div class="inner">
+                      <p>Please login to make a profile.</p>
+                  </div>
                 {% endif %}
 							</div>
 						</section>
