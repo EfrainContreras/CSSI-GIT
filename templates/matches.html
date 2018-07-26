@@ -61,7 +61,7 @@
 													{% if not user.email in current_user.attending %}
 														{% if current_user.gender == user.genderPref or user.genderPref == "Either" %}
 															{% if user.num != "0" and current_user != user %}
-															 {% if user.city == current_user.city and user.state == current_user.state %}
+															 {% if user.city == current_user.uCity and user.state == current_user.uState %}
 												      		<li class="icon fa-heart-o 2">
 																		<form method="POST">
 														  				<h3>{{user.name}}</h3>

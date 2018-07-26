@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
     <link rel="stylesheet" href="assets/css/main.css" />
     <noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
-
+    <script src="assets/js/maps.js"></script>
     <title>Your Profile</title>
   </head>
   <body class="is-preload">
@@ -58,6 +58,9 @@
                     <p>Gender: {{user.gender}}</p>
                   {% endif %}
 
+                  {% if user.uCity %}
+                    <p>City and State: {{user.uCity}}, {{user.uState}}</p>
+                  {% endif %}
 
                   <p>Email: {{user.email}}</p>
 
@@ -78,6 +81,33 @@
                       </select></br>
 
                       <input name = "name" placeholder = "Name" type = "text" required></br>
+
+                      <div id="locationField">
+                        <input id="autocomplete" placeholder="Please enter your city and state only" onFocus="geolocate()" type="text"></input></br>
+                      </div>
+
+                      <table id="address" hidden>
+                        <tr>
+                          <td class="label">Street Adress</td>
+                          <td class="slimField"><input class="field" id="street_number" disabled="true"></input></td>
+                          <td class="wideField" colspan="2"><input class="field" id="route" disabled="true"></input></td>
+                        </tr>
+                        <tr>
+                          <td class="label">City</td>
+                          <td class="wideField" colspan="3"><input class="field" id="locality" disabled="true" name="uCity"></input></td>
+                        </tr>
+                        <tr>
+                          <td class="label">State</td>
+                          <td class="slimField"><input class="field" id="administrative_area_level_1" disabled="true" name="uState"></input></td>
+                          <td class="label">Zip code</td>
+                          <td class="wideField"><input class="field" id="postal_code" disabled="true"></input></td>
+                        </tr>
+                        <tr>
+                          <td class="label">Country</td>
+                          <td class="wideField" colspan="3"><input class="field" id="country" disabled="true"></input></td>
+                        </tr>
+                      </table>
+
                       <input name = "phone" placeholder = "Phone" type = "text" required></br>
                       <textarea rows = '4' columns = '50' name = "bio" placeholder = "Bio" type = "text" required></textarea></br>
 
@@ -90,6 +120,7 @@
                   </div>
                 {% endif %}
 							</div>
+              <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnjNIECrdVUpd6nc_VkpBUwLGubtlu7P8&libraries=places&callback=initAutocomplete" async defer></script>
 						</section>
 					</article>
 

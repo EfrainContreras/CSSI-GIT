@@ -65,7 +65,6 @@ class JUser(ndb.Model):
     bio = ndb.StringProperty(required=False)
     name = ndb.StringProperty(required=False)
     phone = ndb.StringProperty(required=False)
-    location = ndb.StringProperty(required=False)
     time = ndb.StringProperty(required=False)
     date = ndb.StringProperty(required=False)
     num = ndb.StringProperty(required=False)
@@ -76,6 +75,8 @@ class JUser(ndb.Model):
     city = ndb.StringProperty(required=False)
     state = ndb.StringProperty(required=False)
     address = ndb.StringProperty(required=False)
+    uCity = ndb.StringProperty(required=False)
+    uState = ndb.StringProperty(required=False)
 
 
 
@@ -111,6 +112,8 @@ class ProfileHandler(webapp2.RequestHandler):
         user.bio = self.request.get("bio")
         user.phone = self.request.get("phone")
         user.gender = self.request.get("gender")
+        user.uCity = self.request.get("uCity")
+        user.uState = self.request.get("uState")
         user.put()
 
         variables = {"user": user}
