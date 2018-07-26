@@ -83,7 +83,6 @@ class JUser(ndb.Model):
 
 
 
-
 class MainPage(webapp2.RequestHandler):
     def get(self):
 
@@ -96,6 +95,7 @@ class MainPage(webapp2.RequestHandler):
                     "log_url": log_url}
         template = jinja_environment.get_template("main.html")
         self.response.write(template.render(variables))
+
 
 class ProfileHandler(webapp2.RequestHandler):
     def get(self):
@@ -128,7 +128,6 @@ class RequestHandler(webapp2.RequestHandler):
 
     def post(self):
         user = find_or_create_user()
-        user.location = self.request.get("location")
         user.date = self.request.get('date')
         user.time =  self.request.get('time')
         user.num = self.request.get("num")
@@ -244,8 +243,7 @@ app = webapp2.WSGIApplication([
     ('/request', RequestHandler),
     ('/matches', MatchesHandler),
     ('/calendar', CalendarHandler),
-    ('/places', PlacesHandler),
-    ("/success", SuccessHandler)
+    ('/places', PlacesHandler)
 ], debug=True)
 
 
