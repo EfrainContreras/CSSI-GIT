@@ -56,6 +56,18 @@
       							</header>
 										{% if current_user.name %}
 	      							<ul class="features" style="margin: 30px;">
+												{% if current_user.address %}
+													<li class="icon fa-heart-o 2">
+															<h3>{{current_user.name}}</h3>
+															<p>{{email}}</p>
+															<p>Bio: {{current_user.bio}}</p>
+															<p>Gender: {{current_user.gender}}</p>
+															<p>Location: {{current_user.address}}</p>
+															<p>Date & Time: {{current_user.date}} at {{current_user.time}}</p>
+															<p>Spaces Left: {{current_user.num}}</p>
+															<p>Number of People Going: {{current_user.numGoing}}</p>
+													</li>
+												{% endif %}
 												{% for user in all_users %}
 													{% if user.email in current_user.attending %}
 														{% if user.num != "0" and current_user != user %}
