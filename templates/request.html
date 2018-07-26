@@ -49,6 +49,9 @@
     							<div class="inner">
                     <p><b><i>Your Request</i></b></p>
 
+                    {% if user.genderPref %}
+                      <p>Gender Preference: {{user.genderPref}}</p>
+                    {% endif %}
                     {% if user.location %}
                       <p>Location: {{user.location}}</p>
                     {% endif %}
@@ -64,6 +67,13 @@
                       </form>
                     {% else %}
                       <form method="POST">
+                        
+                        <select name="genderPref">
+                          <option value="Either">No Gender Preference</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                        </select></br>
+
                         <input name = "location" placeholder = "Location" type = "text"></br>
                         <input name = "num" placeholder = "Number of People" type = "text"></br>
                         <p style="color: gray">
